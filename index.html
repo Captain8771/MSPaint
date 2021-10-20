@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MSPaint</title>
+    <script src="api.js"></script>
+    <script src="paint.js"></script>
+    <link rel="stylesheet" type="text/css" href="./index.css">
+</head>
+<body oncontextmenu="return false" onload="load_api(); load_paint()">
+<canvas id="can"></canvas>
+<label>
+    <input type="color" id="cp">
+</label>
+<p style="position: relative; top: -15px">E and Q to change brush size, space to clear screen</p>
+</body>
+</html>
