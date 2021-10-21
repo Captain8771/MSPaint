@@ -32,8 +32,10 @@ function set_key(key, bool=true) {
 }
 function load_api() {
     this.Game = undefined
+    this.helper = document.getElementsByClassName("dot-resizing")[0]
     this.c = document.getElementById("can")
     this.cp = document.getElementById("cp")
+    this.cur = document.getElementsByClassName("dot")[0]
     this.c.width = innerWidth
     this.c.height = innerHeight - 69
     this.mouse = {
@@ -82,6 +84,10 @@ function load_api() {
             case "2": this.mouse.right = true; break;
         }
     })
+    document.addEventListener("mousedown", ev => {
+        this.oldX = this.mouse.x
+        this.oldY = this.mouse.y
+    })
     document.addEventListener("mouseup", ev => {
         switch(ev.button.toString()) {
             case "0": this.mouse.left = false; break;
@@ -102,6 +108,19 @@ function refreshcanvas() {
     this.c.width += 1
     this.c.width = innerWidth
     this.c.height = innerHeight - 69
+}
+
+function line(x, y, r, c) {
+    let ctx = this.c.getContext("2d")
+    ctx.beginPath()
+    ctx.lineWidth = r
+    ctx.lineCap = "round"
+    ctx.strokeStyle = c
+    ctx.moveTo(this.oldX, this.oldY)
+    ctx.lineTo(x, y)
+    ctx.stroke()
+    this.oldX = x
+    this.oldY = y
 }
 
 function circle(x, y, r, c) {
